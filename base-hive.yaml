@@ -1,0 +1,59 @@
+# 1. Replace <your_dbs_endpoint> with your RDS instance endpoint
+#    (AWS ex. kyle-payne-bootcamp-postgresql.cs8j7iukogcy.us-east-2.rds.amazonaws.com)
+#    (Azure ex. kyle-payne-bootcamp.postgres.database.azure.com)
+# 2. If you are working on labs in Azure then replace <abfs-account> with your blog storage account.
+#    (Azure ex. kylepaynelab01stg)
+# 3. If you are working on labs in Azure then replace <abfs-key> with your blog storage accounts access key.
+#    (Azure ex. VEys9BSb2BLAHV/DU4QRfQYxaGpHkJye9MUFAKENOTREAL0StSsX25J6qsfw+80JWBLAHnOww0tZWb930itLLA==)
+# 4. If youa re working on the labs in Azure then scroll down to the bottom to alter the comments in the
+#    objectStorage section.
+
+# This affinity will ensure hive is deployed in the base node group.
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: app
+              operator: In
+              values:
+                - sep
+
+database:
+  external:
+    driver: org.postgresql.Driver
+    jdbcUrl: jdbc:postgresql://postgresql.spark.svc.cluster.local:5432/postgres
+    user: postgres
+    password: oFYzKVE15f
+  type: external
+
+resources:
+  requests:
+    memory: "2Gi"
+    cpu: 0.25
+  limits:
+    memory: "4Gi"
+    cpu: 2
+
+# The following is for objetstorage section is for AWS
+# If you are running in Azure then comment it out.
+objectStorage:
+  awsS3:
+    endpoint: "https://minios3.campus.clusterdiali.me"
+    pathStyleAccess: true
+    accessKey: UjyRAOqhpQXnW2xBbWxj
+    secretKey: Y1M1kyok0rkxWIfPMZYckxkMzZ9D8YEQa9Y6Dk27
+# The following is for objetstorage section is for Azure
+# If you are running in Azure then remove the comments.
+#objectStorage:
+#  azure:
+#    abfs:
+#      authType: "accessKey"
+#      accessKey:
+#        storageAccount: <abfs-account>
+#        accessKey: <abfs-key>
+#      authType: oauth
+#      oauth:
+#        endpoint: <oauth2-v1-token-endpoint>
+#        clientId: <azure-client-id>
+#        secret: <azure-client-secret>

@@ -1,0 +1,98 @@
+# 1. Find and Replace <your-name> with your name seperated with a dash (ex. kyle-payne).
+# 2. Replace <your_dbs_endpoint> with your RDS instance endpoint
+#    (AWS ex. kyle-payne-bootcamp-postgresql.cs8j7iukogcy.us-east-2.rds.amazonaws.com)
+#    (Azure ex. kyle-payne-bootcamp.postgres.database.azure.com)
+
+# Name of the k8s Secret holding the Starburst License file
+starburstPlatformLicense: starburstdata
+
+# The enviroment setting is what you'll see on the main Web UI for the ENVIRONMENT name.
+# The sharedSecret is not a k8s Secret it is what the coordinator and worker will use
+# to confirm internal communications. More can be found in the SEP doc on this.
+environment: hamza_lab01
+sharedSecret: u70Qhhw9PsZmEgIo7Zqg3kIj3AJZ5/Mnyy5iyjcsgnceM+SSV+APSTisjlFVH
+
+# As a starting best practice always set the requests and limits memmory and CPU to the same thing.
+coordinator:
+  resources:
+    requests:
+      memory: "8Gi"
+      cpu: 3
+    limits:
+      memory: "8Gi"
+
+  # This affinity will ensure the coordinator and worker are deployed in the sep node group.
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - sep
+
+  etcFiles:
+    properties:
+      log.properties: |
+        io.trino=DEBUG
+      #cache.properties: |
+      #  service-database.user=postgres
+      #  service-database.password=StarburstR0cks!
+      #  service-database.jdbc-url=jdbc:postgresql://<your_dbs_endpoint>:5432/eks_redirections
+      #  starburst.user=caching_service
+      #  starburst.password=
+      #  starburst.jdbc-url=jdbc:trino://coordinator:8080
+      #  rules.file=secretRef:cache-rules:cache-rules.json
+      #  rules.refresh-period=1m
+      #  refresh-initial-delay=1m
+      #  refresh-interval=2m
+  additionalProperties: |
+    insights.persistence-enabled=true 
+    insights.metrics-persistence-enabled=true
+    insights.jdbc.url=jdbc:postgresql://postgresql.spark.svc.cluster.local:5432/postgres
+    insights.jdbc.user=postgres
+    insights.jdbc.password=oFYzKVE15f
+    starburst.access-control.enabled=true
+    starburst.access-control.audit.enabled=true
+    starburst.audit.access-log.enabled=true
+    starburst.access-control.authorized-users=starburst_service
+
+expose:
+  type: "loadBalancer"
+  loadBalancer:
+    name: "starburst"
+    ports:
+      http:
+        port: 8443
+    # annotations:
+    #   service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+    #   service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+    #   networking.gke.io/load-balancer-type: "Internal"
+
+worker:
+  replicas: 1
+  #autoscaling:
+  #  enabled: true
+  #  minReplicas: 1
+  #  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80 # default is 80
+  deploymentTerminationGracePeriodSeconds: 10 # default is 300; it is actually how long the graceful shutdown waits after it receives the SIGTERM
+  starburstWorkerShutdownGracePeriodSeconds: 120 # default is 120
+  resources:
+    requests:
+      memory: "8Gi"
+      cpu: 3
+    limits:
+      memory: "8Gi"
+
+  # This affinity will ensure the coordinator and worker are deployed in the sep node group.
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - sep

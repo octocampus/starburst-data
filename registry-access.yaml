@@ -1,0 +1,10 @@
+# 1. Find and Replace <harbor-username> with your harbor username.
+# 2. Find and Replace <harbor-password> with your harbor password.
+#    The username and password are stored in the AWS Secrets Mananger in secret harbor_non-automation.
+#    If you are running this lab from the Partner AWS account then your Starburst Partner manager should have provided
+#    you with your username and password.
+registryCredentials:
+  enabled: true
+  registry: harbor.starburstdata.net/starburstdata
+  username: partner-nemo
+  password: 3cyYc1ndn1cCdc41

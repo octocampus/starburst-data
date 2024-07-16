@@ -36,24 +36,20 @@ resources:
     cpu: 2
 
 # The following is for objetstorage section is for AWS
-# If you are running in Azure then comment it out.
 objectStorage:
   awsS3:
     endpoint: "https://minios3.campus.clusterdiali.me"
     pathStyleAccess: true
     accessKey: UjyRAOqhpQXnW2xBbWxj
     secretKey: Y1M1kyok0rkxWIfPMZYckxkMzZ9D8YEQa9Y6Dk27
-# The following is for objetstorage section is for Azure
-# If you are running in Azure then remove the comments.
-#objectStorage:
-#  azure:
-#    abfs:
-#      authType: "accessKey"
-#      accessKey:
-#        storageAccount: <abfs-account>
-#        accessKey: <abfs-key>
-#      authType: oauth
-#      oauth:
-#        endpoint: <oauth2-v1-token-endpoint>
-#        clientId: <azure-client-id>
-#        secret: <azure-client-secret>
+
+# Environment variables for secure connection
+env:
+  - name: USE_OPENJSSE
+    value: "true"
+
+# Additional annotations for the service (optional)
+additionalAnnotations: {}
+
+# Additional volumes (if necessary for secrets or certificates)
+additionalVolumes: []

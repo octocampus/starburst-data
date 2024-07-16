@@ -14,7 +14,7 @@
 # 6. If you are running the labs in Azure then go to the mysql catalog and comment out connection-user=admin and remove the comment for connection-user=saadmin.
 
 catalogs:
-  iceberg_minio: |
+  iceberg_minio_1: |
     connector.name=iceberg
     iceberg.catalog.type=hive_metastore
     iceberg.security=system
@@ -24,18 +24,4 @@ catalogs:
     hive.s3.endpoint=http://212.47.236.230:9000
     hive.s3.path-style-access=true
     hive.s3.ssl.enabled=false
-    hive.metastore-timeout=30s
-
-
-  catalogs:
-  iceberg2_minio: |
-    connector.name=iceberg
-    iceberg.catalog.type=hive_metastore
-    iceberg.security=system
-    hive.metastore.uri=thrift://hive.spark.svc.cluster.local:9083
-    hive.s3.aws-access-key=UjyRAOqhpQXnW2xBbWxj
-    hive.s3.aws-secret-key=Y1M1kyok0rkxWIfPMZYckxkMzZ9D8YEQa9Y6Dk27
-    hive.s3.endpoint=https://minios3.campus.clusterdiali.me
-    hive.s3.path-style-access=true
-    hive.s3.ssl.enabled=true
     hive.metastore-timeout=30s

@@ -86,7 +86,7 @@ helm upgrade hive starburstdata/starburst-hive --install --version <version> --v
   ```sh
 helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
   ```
-### For more information visit this link: https://docs.starburst.io/latest/k8s.html
+### For more information visit this link:
 
 ```sh
 https://docs.starburst.io/latest/k8s.html
@@ -96,6 +96,7 @@ https://docs.starburst.io/latest/k8s.html
 
 1.  CDP - Open Datalakehouse
     Open Data Lakehouse components:
+    
     - Support for Apache Iceberg 1.3 access and processing in CDP Private Cloud Base 7.1.9
     - Compute engines (Impala, Spark, Flink, Nifi) integration for accessing and processing Iceberg datasets concurrently
     - SDX integration with Iceberg catalog
@@ -103,7 +104,7 @@ https://docs.starburst.io/latest/k8s.html
     - Iceberg Catalog set to HiveCatalog for Metastore management of Iceberg Tables
     - Certified HDFS and Ozone storage
 
-## Note:
+### Note:
 
 CDP Open Data Lakehouse does not support queries of Iceberg tables from the Hive compute engine in this release.
 

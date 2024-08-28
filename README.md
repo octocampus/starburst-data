@@ -72,14 +72,6 @@ helm upgrade starburst starburstdata/starburst-enterprise --install --version <v
        You might also have more than one catalog pointing to the same data source, but with different properties for each catalog. Perhaps you want to set authorization differently for different groups of users. Whatever 
        setup you choose, the important thing to remember is connectors are the key property in the catalog configuration.
        
-### Install the deployment of Hive   
-
-   The Hive Metastore Service (HMS) is required for the hive connector. 
-   Run the following command in a terminal.
-   
-   ```sh
-helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
-   ```
 
 ### Upgrade the starburst deployment
 
@@ -154,9 +146,24 @@ iceberg.security=system
 
 ## Configure Starburst Enterprise with Iceberg MinIO S3
 
-1. Install the Deployment of Hive:
-   The Hive Metastore Service (HMS) is required for the hive connector.
+### Install the Deployment of Hive
+
+   The Hive Metastore Service (HMS) is required for the hive connector. 
+   Run the following command in a terminal.
 
 ```sh
 helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
 ```
+### Configure SEP (Starburst entreprise) catalogs to connect to MinIO S3 using a Hive Metastore deployed in Kubernetes
+
+```sh
+    connector.name=iceberg
+    iceberg.catalog.type=hive_metastore
+    iceberg.security=system
+    hive.metastore.uri=thrift://hive.spark:9083
+    hive.s3.aws-access-key='Your accces key from minio'
+    hive.s3.aws-secret-key='Your secret Key from minio'
+    hive.s3.endpoint=''
+    hive.s3.path-style-access=true
+```
+

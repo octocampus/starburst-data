@@ -108,9 +108,14 @@ https://docs.starburst.io/latest/k8s.html
 
 CDP Open Data Lakehouse does not support queries of Iceberg tables from the Hive compute engine in this release.
 
+You can check this information  from the cloudera Docs.
+
+```sh
+https://docs.cloudera.com/cdp-private-cloud-base/7.1.9/lakehouse-overview/topics/private-cloud-open-data-lakehouse.html
+```
 If the Iceberg storage handler is not included in Hive's classpath, Hive won't be able to manage the metadata for an Iceberg table with the storage handler set. To prevent issues in Hive, Iceberg doesn't add the storage handler to a table unless Hive support is activated. The storage handler is synchronized (added or removed) whenever Hive support is toggled in the table properties. You can enable Hive support in two ways: globally in Hadoop Configuration or on a per-table basis using a table property.
 
-## Configure Starburst Entreprise with Cloudera Data Platform (CDP).
+### Configure Starburst Entreprise with Cloudera Data Platform (CDP).
 
 1.  Cloudera Data Platform support (Use the Starburst Hive connector to query Cloudera Data Platform (CDP) version 7.1 or higher.)
 2.  Configuration
@@ -131,11 +136,11 @@ hive.metastore.uri=thrift://cdp-master:9083
     - Fulfill the Iceberg connector requirements
     - Hive Metastore 3.1.2 or later
 
-### Performance
+#### Performance
 
 - Dynamic filtering, and specifically also dynamic row filtering, is enabled by default. Row filtering improves the effectiveness of dynamic filtering for a connector by using dynamic filters to remove unnecessary rows during a table scan. It is especially powerful for selective filters on columns that are not used for partitioning, bucketing, or when the values do not appear in any clustered order naturally.
 
-### Security
+#### Security
 
 - If you have enabled built-in access control for SEP, you must add the following configuration to all Iceberg catalogs:
 
@@ -143,7 +148,7 @@ hive.metastore.uri=thrift://cdp-master:9083
 iceberg.security=system
 ```
 
-### Limitations
+#### Limitations
 
 - Presorting tables is not supported.
 

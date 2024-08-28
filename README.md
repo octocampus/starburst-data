@@ -84,7 +84,7 @@ helm upgrade hive starburstdata/starburst-hive --install --version <version> --v
 ### Upgrade the starburst deployment
 
   ```sh
-helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
+helm upgrade starburst starburstdata/starburst-enterprise --install --version 448.0.0 --namespace spark --values registry-access.yaml --values auth-password-biac-sep-prod-cluster-setup.yaml --values catalog-minio-s3.yaml --values catalog-hive-iceberg.yaml --values catalog-minio-ssl.yaml
   ```
 
 ### For more information visit this link:

@@ -144,7 +144,7 @@ iceberg.security=system
 
 - Presorting tables is not supported.
 
-## Configure Starburst Enterprise with Iceberg MinIO S3
+## Configure Starburst Enterprise/ Dremio Entreprise with Iceberg MinIO S3
 
 ### Install the Deployment of Hive
 
@@ -167,17 +167,22 @@ helm upgrade hive starburstdata/starburst-hive --install --version <version> --v
     hive.s3.path-style-access=true
 ```
 ### Configure Dremio entreprise to connect with MinIO S3 using Apache Iceberg as the table format and a Hive Metastore deployed in Kubernetes
-```sh
+
 Adding a new data source in Dremio is a straightforward process that can be done directly from the user interface.
 Click on the "Add Source" button, A list of available source types will appear. Dremio supports a wide range of sources, including HDFS, Hive, S3, and various SQL databases like MySQL and PostgreSQL. 
 Select Hive Hive 3.x .
-```
+
 Here's the configuration:
 
 <img width="1212" alt="Screenshot 2024-08-28 at 23 21 40" src="https://github.com/user-attachments/assets/d8e50c79-01a8-4f2c-8b2e-35f16b02eea2">
 
 
+
 <img width="1205" alt="Screenshot 2024-08-28 at 23 21 29" src="https://github.com/user-attachments/assets/be919019-97db-44be-a697-4d1f6cc426a6">
+
+### Summary
+
+Dremio and Starburst Enterprise are both configured to query the same Apache Iceberg table stored in MinIO S3, utilizing a shared Hive Metastore deployed in a Kubernetes environment. This setup allows both platforms to access the same data source, enabling consistent data management and analysis across different query engines
 
 
 

@@ -185,6 +185,19 @@ Here's the configuration:
 Dremio and Starburst Enterprise are both configured to query the same Apache Iceberg table stored in MinIO S3, utilizing a shared Hive Metastore deployed in a Kubernetes environment. This setup allows both platforms to access the same data source, enabling consistent data management and analysis across different query engines
 
 
+# Benshmarking Straburst Entreprise & Dremio Entreprise using Jmeter
+
+### Steps to Install Apache JMeter
+1. Download Apache JMeter (I installed apache-jmeter-5.6.3 2 and once the download is complete, extract the JMeter archive to a location of your choice)
+2. Install Java (if not already installed). JMeter requires Java (JDK or JRE) to be installed. Ensure you have at least Java 8 or a newer version.
+3. Start Apache JMeter
+   
+   
+
+
+
+
+
 
 
 

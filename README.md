@@ -154,7 +154,7 @@ iceberg.security=system
 ```sh
 helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
 ```
-### Configure SEP (Starburst entreprise) catalogs to connect to MinIO S3 using a Hive Metastore deployed in Kubernetes
+### Configure SEP catalogs to connect with MinIO S3 using Apache Iceberg as the table format and a Hive Metastore deployed in Kubernetes
 
 ```sh
     connector.name=iceberg
@@ -166,4 +166,22 @@ helm upgrade hive starburstdata/starburst-hive --install --version <version> --v
     hive.s3.endpoint=''
     hive.s3.path-style-access=true
 ```
+### Configure Dremio entreprise to connect with MinIO S3 using Apache Iceberg as the table format and a Hive Metastore deployed in Kubernetes
+```sh
+Adding a new data source in Dremio is a straightforward process that can be done directly from the user interface.
+Click on the "Add Source" button, A list of available source types will appear. Dremio supports a wide range of sources, including HDFS, Hive, S3, and various SQL databases like MySQL and PostgreSQL. 
+Select Hive Hive 3.x .
+```
+Here's the configuration:
+
+<img width="1212" alt="Screenshot 2024-08-28 at 23 21 40" src="https://github.com/user-attachments/assets/d8e50c79-01a8-4f2c-8b2e-35f16b02eea2">
+
+
+<img width="1205" alt="Screenshot 2024-08-28 at 23 21 29" src="https://github.com/user-attachments/assets/be919019-97db-44be-a697-4d1f6cc426a6">
+
+
+
+
+
+
 

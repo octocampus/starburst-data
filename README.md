@@ -46,12 +46,7 @@ kubectl create secret generic starburstdata --from-file starburstdata.license
 helm upgrade starburst starburstdata/starburst-enterprise --install --version <version> --values registry-access.yaml --values error-stop-sep-cluster.yaml
 ```
 
-for more information you can see this link: https://docs.starburst.io/latest/k8s.html
-
-```sh
-https://docs.starburst.io/latest/k8s.html
-```
-- Configure the query logger
+### Configure the query logger
   
    The Starburst Enterprise platform (SEP) query logger is the backend service that stores information for:
      - Query completion details and events
@@ -61,13 +56,15 @@ https://docs.starburst.io/latest/k8s.html
      - Managed statistics
    You must provide and configure a suitable database, and enable the service as described in the requirements and installation sections that follow.
    Requirements:
+
      - MySQL 8.0.12+
      - PostgreSQL 9.6+
      - OracleDB 12.2.0.1+
-   In this case we used postgresqlVersion=12.0 as the backend service.
      - Network access from the coordinator to the external database.
        
-  Configure catalogs
+   postgresqlVersion=12.0 is used as the backend service.
+       
+ ### Configure catalogs
    
      - Connector vs. catalog
        In Starburst, you configure a catalog, which has many properties. One of those properties is the connector. You can think of the connector as the star of the show in the catalog because each catalog can only have one        connector, and the rest of the properties are all specific to that connector. However, you can have multiple catalogs that each contain the same connector. For instance, suppose you have two Teradata Systems. In this 
@@ -89,6 +86,11 @@ helm upgrade hive starburstdata/starburst-hive --install --version <version> --v
   ```sh
 helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
   ```
+### For more information visit this link: https://docs.starburst.io/latest/k8s.html
+
+```sh
+https://docs.starburst.io/latest/k8s.html
+```
 
 ## Configure CDP 1.7.9 with Iceberg Table Format
 

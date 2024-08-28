@@ -66,10 +66,9 @@ helm upgrade starburst starburstdata/starburst-enterprise --install --version <v
        
  ### Configure catalogs
    
-     - Connector vs. catalog
+     - Connector vs Catalog
        In Starburst, you configure a catalog, which has many properties. One of those properties is the connector. You can think of the connector as the star of the show in the catalog because each catalog can only have one        connector, and the rest of the properties are all specific to that connector. However, you can have multiple catalogs that each contain the same connector. For instance, suppose you have two Teradata Systems. In this 
        case, you would have a separate catalog for each, but both of those catalogs would have the same type of connector.
-
        You might also have more than one catalog pointing to the same data source, but with different properties for each catalog. Perhaps you want to set authorization differently for different groups of users. Whatever 
        setup you choose, the important thing to remember is connectors are the key property in the catalog configuration.
        
@@ -81,11 +80,13 @@ helm upgrade starburst starburstdata/starburst-enterprise --install --version <v
    ```sh
 helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
    ```
+
 ### Upgrade the starburst deployment
 
   ```sh
 helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
   ```
+
 ### For more information visit this link:
 
 ```sh
@@ -106,10 +107,9 @@ https://docs.starburst.io/latest/k8s.html
 
 ### Note:
 
-CDP Open Data Lakehouse does not support queries of Iceberg tables from the Hive compute engine in this release.
+CDP Open Data Lakehouse does not support queries of Iceberg tables from the Hive compute engine in this release(CDP 7.1.9).
 
-You can check this information  from the cloudera Docs.
-
+You can check this information in the Cloudera documentation.
 ```sh
 https://docs.cloudera.com/cdp-private-cloud-base/7.1.9/lakehouse-overview/topics/private-cloud-open-data-lakehouse.html
 ```

@@ -1,6 +1,6 @@
 # Starburst Enterprise Deployment with Iceberg, Cloudera Data Platform (CDP) version 7.1.9, and MinIO S3
 
-This guide provides comprehensive steps for deploying Starburst Enterprise, configuring CDP with Iceberg table format, and integrating with MinIO S3
+This guide provides comprehensive steps for deploying Starburst Enterprise on kubernetes cluster, configuring CDP with Iceberg table format, and integrating with MinIO S3
 
 # Prerequisites
 

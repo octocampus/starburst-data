@@ -16,6 +16,7 @@ This guide provides comprehensive steps for deploying Starburst Enterprise on ku
 1.  Deploy Starburst Coordinator and Worker Pods:
 
 - Use Helm charts for deployment:
+  Don’t forget to replace <version> with the version of Starburst Enterprise you want to deploy.(I used version 448.0.0)
 
 ```sh
 helm repo add --username=<username> --password=<password> starburstdata https://harbor.starburstdata.net/chartrepo/starburstdata
@@ -50,6 +51,44 @@ for more information you can see this link: https://docs.starburst.io/latest/k8s
 ```sh
 https://docs.starburst.io/latest/k8s.html
 ```
+- Configure the query logger
+  
+   The Starburst Enterprise platform (SEP) query logger is the backend service that stores information for:
+     - Query completion details and events
+     - Cluster metrics
+     - Data products
+     - Built-in role-based access control
+     - Managed statistics
+   You must provide and configure a suitable database, and enable the service as described in the requirements and installation sections that follow.
+   Requirements:
+     - MySQL 8.0.12+
+     - PostgreSQL 9.6+
+     - OracleDB 12.2.0.1+
+   In this case we used postgresqlVersion=12.0 as the backend service.
+     - Network access from the coordinator to the external database.
+       
+  Configure catalogs
+   
+     - Connector vs. catalog
+       In Starburst, you configure a catalog, which has many properties. One of those properties is the connector. You can think of the connector as the star of the show in the catalog because each catalog can only have one        connector, and the rest of the properties are all specific to that connector. However, you can have multiple catalogs that each contain the same connector. For instance, suppose you have two Teradata Systems. In this 
+       case, you would have a separate catalog for each, but both of those catalogs would have the same type of connector.
+
+       You might also have more than one catalog pointing to the same data source, but with different properties for each catalog. Perhaps you want to set authorization differently for different groups of users. Whatever 
+       setup you choose, the important thing to remember is connectors are the key property in the catalog configuration.
+       
+### Install the deployment of Hive   
+
+   The Hive Metastore Service (HMS) is required for the hive connector. 
+   Run the following command in a terminal.
+   
+   ```sh
+helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
+   ```
+### Upgrade the starburst deployment
+
+  ```sh
+helm upgrade hive starburstdata/starburst-hive --install --version <version> --values registry-access.yaml --values base-hive.yaml
+  ```
 
 ## Configure CDP 1.7.9 with Iceberg Table Format
 

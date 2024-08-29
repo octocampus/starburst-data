@@ -195,7 +195,7 @@ Dremio and Starburst Enterprise are both configured to query the same Apache Ice
    - Run the JMeter GUI application with this command:
      
    ```sh
-      sh jmeter.sh
+   sh jmeter.sh
    ```
 The JMeter GUI will open, and you can start creating your test plans
 
@@ -207,7 +207,7 @@ The JMeter GUI will open, and you can start creating your test plans
   Directly on the command line:
 
    ```sh
-      vim jmeter.sh
+   vim jmeter.sh
    ```
 
    ```sh
@@ -228,6 +228,31 @@ The JMeter GUI will open, and you can start creating your test plans
   --add-opens java.base/java.io=ALL-UNNAMED \
   --add-opens java.base/java.nio=org.apache.arrow.memory.core,ALL-UNNAMED"
   ```
+
+4. Create a New Test Plan
+   - create one manually by clicking on File > New
+5. Add a Thread Group
+   - Right-click on the Test Plan > Add > Threads (Users) > Thread Group
+   - The Thread Group is where you define the number of users (threads), ramp-up period (time to start all users), and loop count (number of times to execute the test.
+     
+6. Add an JDBC Connection configuration
+   
+ - Right-click on Thread Group > Config Elemnt > JDBC Connection configuration
+ - Right-click on Test plan > Add > Sampler > HTTP Request.
+
+Here's how you can configure connection with Starburst Entreprise
+<img width="1727" alt="Screenshot 2024-08-29 at 11 11 03" src="https://github.com/user-attachments/assets/5cd891ed-8eb0-4e12-8af5-03ee2bb0c595">
+
+Here's how you can configure connection with Dremio Entreprise
+
+<img width="1728" alt="Screenshot 2024-08-29 at 11 12 51" src="https://github.com/user-attachments/assets/67df0e2b-c6ee-4972-9f06-3f7ac3f8a221">
+
+7. Add a Listener to View Results
+   
+ - Right-click on Thread Group > Add > Listener > View Results Tree.
+ - Right-click on Thread Group > Add > Listener > Summary Report.
+
+
 
 
    

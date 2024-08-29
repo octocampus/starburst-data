@@ -4,8 +4,7 @@ This guide provides comprehensive steps for deploying Starburst Enterprise on ku
 
 # Global achitecture
 
-<img width="1443" alt="Screenshot 2024-07-09 at 13 26 57" src="https://github.com/user-attachments/assets/4c0a018b-a582-42c1-ae5c-9ed80f2ebc13">
-
+<img width="1687" alt="Screenshot 2024-08-29 at 12 24 30" src="https://github.com/user-attachments/assets/397c1b8d-f18d-4b6c-b792-104af094160d">
 
 # Prerequisites
 

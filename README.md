@@ -191,6 +191,45 @@ Dremio and Starburst Enterprise are both configured to query the same Apache Ice
 1. Download Apache JMeter (I installed apache-jmeter-5.6.3 2 and once the download is complete, extract the JMeter archive to a location of your choice)
 2. Install Java (if not already installed). JMeter requires Java (JDK or JRE) to be installed. Ensure you have at least Java 8 or a newer version.
 3. Start Apache JMeter
+   - Navigate to the JMeter bin directory
+   - Run the JMeter GUI application with this command:
+     
+   ```sh
+      sh jmeter.sh
+   ```
+The JMeter GUI will open, and you can start creating your test plans
+
+### Note : Java Compatibility for Dremio Enterprise
+
+  If you are using Java 9 or a newer version, certain internal Java modules must be exposed to avoid compatibility issues with Apache Arrow. This is done by adding specific --add-opens flags to your Java command.
+  
+  Here’s how to add the necessary flag
+  Directly on the command line:
+
+   ```sh
+      vim jmeter.sh
+   ```
+
+   ```sh
+  #--add-opens if JAVA 9
+  JAVA9_OPTS="--add-opens java.desktop/sun.awt=ALL-UNNAMED \
+  --add-opens java.desktop/sun.swing=ALL-UNNAMED \
+  --add-opens java.desktop/javax.swing.text.html=ALL-UNNAMED \
+  --add-opens java.desktop/java.awt=ALL-UNNAMED \
+  --add-opens java.desktop/java.awt.font=ALL-UNNAMED \
+  --add-opens java.base/java.lang=ALL-UNNAMED \
+  --add-opens java.base/java.lang.invoke=ALL-UNNAMED \
+  --add-opens java.base/java.lang.reflect=ALL-UNNAMED \
+  --add-opens java.base/java.util=ALL-UNNAMED \
+  --add-opens java.base/java.text=ALL-UNNAMED \
+  --add-opens java.desktop/sun.awt.X11=ALL-UNNAMED \
+  --add-opens java.desktop/sun.awt.shell=ALL-UNNAMED \
+  --add-opens java.base/java.nio=ALL-UNNAMED \
+  --add-opens java.base/java.io=ALL-UNNAMED \
+  --add-opens java.base/java.nio=org.apache.arrow.memory.core,ALL-UNNAMED"
+  ```
+
+
    
    
 

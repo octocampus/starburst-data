@@ -244,10 +244,11 @@ The JMeter GUI will open, and you can start creating your test plans
  - Right-click on Thread Group > Config Elemnt > JDBC Connection configuration
  - Right-click on Test plan > Add > Sampler > HTTP Request.
 
-Here's how you can configure connection with Starburst Entreprise
+Here's how you can configure connection from Jmeter to Starburst Entreprise
+
 <img width="1727" alt="Screenshot 2024-08-29 at 11 11 03" src="https://github.com/user-attachments/assets/5cd891ed-8eb0-4e12-8af5-03ee2bb0c595">
 
-Here's how you can configure connection with Dremio Entreprise
+Here's how you can configure connection from Jmeter to Dremio Entreprise
 
 <img width="1728" alt="Screenshot 2024-08-29 at 11 12 51" src="https://github.com/user-attachments/assets/67df0e2b-c6ee-4972-9f06-3f7ac3f8a221">
 
@@ -255,6 +256,10 @@ Here's how you can configure connection with Dremio Entreprise
    
  - Right-click on Thread Group > Add > Listener > View Results Tree.
  - Right-click on Thread Group > Add > Listener > Summary Report.
+
+### Summary
+
+JMeter was utilized to benchmark the query performance of Starburst Enterprise and Dremio when accessing the same Iceberg tables stored in MinIO S3, using a Hive Metastore deployed in Kubernetes.These results can guide optimization efforts and inform decisions on choosing the right query engine based on specific use cases and workload requirements
 
 
 

@@ -2,6 +2,11 @@
 
 This guide provides comprehensive steps for deploying Starburst Enterprise on kubernetes cluster, configuring CDP with Iceberg table format, and integrating with MinIO S3
 
+# Global achitecture
+
+<img width="1443" alt="Screenshot 2024-07-09 at 13 26 57" src="https://github.com/user-attachments/assets/4c0a018b-a582-42c1-ae5c-9ed80f2ebc13">
+
+
 # Prerequisites
 
 - Kubernetes cluster

@@ -6,5 +6,5 @@
 registryCredentials:
   enabled: true
   registry: harbor.starburstdata.net/starburstdata
-  username: partner-nemo
-  password: 3cyYc1ndn1cCdc41
+  username: ###############
+  password: ###############

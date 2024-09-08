@@ -105,7 +105,7 @@ helm upgrade starburst starburstdata/starburst-enterprise --install --version <v
 
 ### Configuring the query logger
   
-   The Starburst Enterprise platform (SEP) query logger is the backend service that stores information for:
+  The Starburst Enterprise platform (SEP) query logger is the backend service that stores information for:
      - Query completion details and events
      - Cluster metrics
      - Data products
@@ -123,13 +123,14 @@ helm upgrade starburst starburstdata/starburst-enterprise --install --version <v
        
  ### Configure catalogs
    
-     - Connector vs Catalog
-       In Starburst, you configure a catalog, which has many properties. One of those properties is the connector. You can think of the connector as the star of the show in the catalog because each catalog can only have one        connector, and the rest of the properties are all specific to that connector. However, you can have multiple catalogs that each contain the same connector. For instance, suppose you have two Teradata Systems. In this 
-       case, you would have a separate catalog for each, but both of those catalogs would have the same type of connector.
-       You might also have more than one catalog pointing to the same data source, but with different properties for each catalog. Perhaps you want to set authorization differently for different groups of users. Whatever 
-       setup you choose, the important thing to remember is connectors are the key property in the catalog configuration.
+ - Connector vs Catalog
+   In Starburst, you configure a catalog, which has many properties. One of those properties is the connector. You can think of the connector as the star of the show in the 
+   catalog because each catalog can only have one connector, and the rest of the properties are all specific to that connector. However, you can have multiple catalogs that each 
+   contain the same connector. For instance, suppose you have two Teradata Systems. In this case, you would have a separate catalog for each, but both of those catalogs would have 
+   the same type of connector.
+   You might also have more than one catalog pointing to the same data source, but with different properties for each catalog. Perhaps you want to set authorization differently 
+   for different groups of users. Whatever setup you choose, the important thing to remember is connectors are the key property in the catalog configuration.
        
-
 ### Upgrade the starburst deployment
 
   ```sh

@@ -14,9 +14,53 @@ This guide provides comprehensive steps for deploying Starburst Enterprise on ku
 - Cloudera Data plateform 7.1.9
 - MinIO S3 deployed in Kubernetes
 
-# Steps
+## Table of Contents
 
-## Starburst Enterprise Deployment
+- [Starburst](#SEP)
+    - [What's Straburst Entreprise?](#what-is-Straburst)
+    - [Configuring Starburst Enterprise in Kubernetes](#Configuring-SEP-on-k8s)
+
+- [Cloudera Data Platform (CDP) Private Cloud Base7.1.9](#CDP)
+   - [Configuring CDP 1.7.9 with Iceberg Table Format](#Configuring-CDP-Iceberg)
+   - [Configuring Starburst Entreprise with Cloudera Data Platform (CDP)](#Configuring-Starburst-with-CDP)
+
+- [Configuring Starburst Enterprise & Dremio Entreprise with Apache Iceberg Table Format on MinIO S3](#SEP-DREMIO-ICEBERG-S3)
+   - [Install the Deployment of Hive Metastore (HMS)](#HMS)
+   - [Setup Nessie on k8s](#setup-Nessie-on-k8s)
+
+# What's Straburst Entreprise?
+
+Starburst Enterprise is a high-performance SQL query engine designed for fast and efficient data analytics across various data sources. Built on top of the open-source Trino project, which offers enhanced features for scalability, security, and performance, making it an ideal solution for modern data architectures.
+- massively parallel processing (MPP):
+  which allows it to handle large-scale queries across distributed systems efficiently, providing faster insights from complex data.
+- Data federation capabilities:
+  Starburst Enterprise enables organizations to query data across multiple sources—such as Hadoop, S3, SQL databases, and cloud storage—without needing to move or replicate the 
+  data. This reduces data silos and simplifies data access, ensuring real-time analytics. As a result, businesses can scale their data analytics effortlessly while maintaining 
+  high performance, flexibility, and seamless integration across diverse data environments.
+- SEP ensures that each connector can fully utilize the MPP architecture:
+  esulting in improved query performance, lower latency, and better scalability. This level of optimization is crucial for enterprises that require high-performance analytics 
+  across diverse and distributed data sources.
+- RBAC in Starburst Enterprise:
+  Starburst Enterprise includes a comprehensive implementation of RBAC that allows organizations to define and manage access controls for users and roles more effectively.
+  1. Fine-Grained Access Control:
+     allowing administrators to define specific access permissions at various levels, including catalogs, schemas, tables, columns, and even rows. This allows for precise control over who can access or modify specific pieces of data.
+  2. Role-Based Permissions:
+     Administrators can create roles and assign them specific permissions, making it easy to manage access for groups of users rather than configuring permissions for each  individual user. This supports the principle of least privilege and helps ensure that users only have access to the data they need.
+     
+     Roles can be hierarchical, inheriting permissions from other roles, which simplifies administration and maintenance.
+  4. Integration with Identity Providers:
+     Starburst Enterprise integrates with enterprise identity providers like Okta, Azure Active Directory (AD), LDAP, and Kerberos for seamless user authentication and authorization management. This allows organizations to leverage their existing identity management solutions and streamline user access.
+
+     Single Sign-On (SSO) support and Multi-Factor Authentication (MFA) can also be enforced via these identity providers, adding another layer of security.
+  5. Built-in access control masks and filters:
+     You can use Starburst Enterprise platform (SEP)’s built-in access control to restrict what data users can see at the row and column level. By masking data and filtering rows, you can allow different users to run the same queries, but be prevented from viewing sensitive data. These data obfuscation features are applied to roles using SEP’s ‘built-in     access control privileges.
+  6. Auditing and Compliance:
+     Starburst Enterprise includes enhanced auditing capabilities that log access and query activities. This is crucial for compliance with data governance policies and regulations like GDPR, HIPAA, and CCPA.
+     The audit logs can be integrated with external logging and monitoring systems, such as Splunk or ELK, for better analysis and compliance reporting.
+  7. Integration with Apache Ranger:
+     Starburst Enterprise can integrate with Apache Ranger to provide centralized policy management for access control across multiple services. This allows organizations to define and enforce consistent security policies across the entire data ecosystem.
+
+## Configuring Starburst Enterprise in Kubernetes
 
 1.  Deploy Starburst Coordinator and Worker Pods:
 
@@ -90,7 +134,7 @@ helm upgrade starburst starburstdata/starburst-enterprise --install --version 44
 https://docs.starburst.io/latest/k8s.html
 ```
 
-## Configure CDP 1.7.9 with Iceberg Table Format
+## Configuring CDP 1.7.9 with Iceberg Table Format
 
 1.  CDP - Open Datalakehouse
     Open Data Lakehouse components:
@@ -112,7 +156,7 @@ https://docs.cloudera.com/cdp-private-cloud-base/7.1.9/lakehouse-overview/topics
 ```
 If the Iceberg storage handler is not included in Hive's classpath, Hive won't be able to manage the metadata for an Iceberg table with the storage handler set. To prevent issues in Hive, Iceberg doesn't add the storage handler to a table unless Hive support is activated. The storage handler is synchronized (added or removed) whenever Hive support is toggled in the table properties. You can enable Hive support in two ways: globally in Hadoop Configuration or on a per-table basis using a table property.
 
-### Configure Starburst Entreprise with Cloudera Data Platform (CDP).
+### Configure Starburst Entreprise with Cloudera Data Platform (CDP)
 
 1.  Cloudera Data Platform support (Use the Starburst Hive connector to query Cloudera Data Platform (CDP) version 7.1 or higher.)
 2.  Configuration
@@ -132,7 +176,8 @@ hive.metastore.uri=thrift://cdp-master:9083
     Requirements
     - Fulfill the Iceberg connector requirements
     - Hive Metastore 3.1.2 or later
-
+      
+### Some features of configuring Apache iceberg with HDFS
 #### Performance
 
 - Dynamic filtering, and specifically also dynamic row filtering, is enabled by default. Row filtering improves the effectiveness of dynamic filtering for a connector by using dynamic filters to remove unnecessary rows during a table scan. It is especially powerful for selective filters on columns that are not used for partitioning, bucketing, or when the values do not appear in any clustered order naturally.

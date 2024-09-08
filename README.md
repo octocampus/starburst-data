@@ -38,13 +38,16 @@ Starburst Enterprise is a high-performance SQL query engine designed for fast an
 
 - massively parallel processing (MPP):
   which allows it to handle large-scale queries across distributed systems efficiently, providing faster insights from complex data.
+  
 - Data federation capabilities:
   Starburst Enterprise enables organizations to query data across multiple sources—such as Hadoop, S3, SQL databases, and cloud storage—without needing to move or replicate the 
   data. This reduces data silos and simplifies data access, ensuring real-time analytics. As a result, businesses can scale their data analytics effortlessly while maintaining 
   high performance, flexibility, and seamless integration across diverse data environments.
+  
 - SEP ensures that each connector can fully utilize the MPP architecture:
   esulting in improved query performance, lower latency, and better scalability. This level of optimization is crucial for enterprises that require high-performance analytics 
   across diverse and distributed data sources.
+  
 - RBAC in Starburst Enterprise:
   Starburst Enterprise includes a comprehensive implementation of RBAC that allows organizations to define and manage access controls for users and roles more effectively:
   1. Fine-Grained Access Control:

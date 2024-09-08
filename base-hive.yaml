@@ -40,8 +40,8 @@ objectStorage:
   awsS3:
     endpoint: "https://minios3.campus.clusterdiali.me"
     pathStyleAccess: true
-    accessKey: UjyRAOqhpQXnW2xBbWxj
-    secretKey: Y1M1kyok0rkxWIfPMZYckxkMzZ9D8YEQa9Y6Dk27
+    accessKey: #######################
+    secretKey: #######################
 
 # Environment variables for secure connection
 env:

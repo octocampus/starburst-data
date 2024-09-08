@@ -16,7 +16,7 @@ This guide provides comprehensive steps for deploying Starburst Enterprise on ku
 
 ## Table of Contents
 
-- [Starburst](#SEP)
+- [Starburst Entreprise](#SEP)
     - [What's Straburst Entreprise?](#what-is-Straburst)
     - [Configuring Starburst Enterprise in Kubernetes](#Configuring-SEP-on-k8s)
 
@@ -26,11 +26,16 @@ This guide provides comprehensive steps for deploying Starburst Enterprise on ku
 
 - [Configuring Starburst Enterprise & Dremio Entreprise with Apache Iceberg Table Format on MinIO S3](#SEP-DREMIO-ICEBERG-S3)
    - [Install the Deployment of Hive Metastore (HMS)](#HMS)
-   - [Setup Nessie on k8s](#setup-Nessie-on-k8s)
+   - [Configuring SEP catalogs to connect with MinIO S3 using Apache Iceberg as the table format and a Hive Metastore deployed in Kubernetes](#SEP-HMS-on-S3)
+   - [Configuring Dremio entreprise to connect with MinIO S3 using Apache Iceberg as the table format and a Hive Metastore deployed in Kubernetes](#)
+   - [Summary](#Summary)
+     
+- [Benshmarking Straburst Entreprise & Dremio Entreprise using Jmeter](#Benshmarking-Straburst-Entreprise-&-Dremio-Entreprise-using-Jmeter)
 
 # What's Straburst Entreprise?
 
 Starburst Enterprise is a high-performance SQL query engine designed for fast and efficient data analytics across various data sources. Built on top of the open-source Trino project, which offers enhanced features for scalability, security, and performance, making it an ideal solution for modern data architectures.
+
 - massively parallel processing (MPP):
   which allows it to handle large-scale queries across distributed systems efficiently, providing faster insights from complex data.
 - Data federation capabilities:
@@ -41,7 +46,7 @@ Starburst Enterprise is a high-performance SQL query engine designed for fast an
   esulting in improved query performance, lower latency, and better scalability. This level of optimization is crucial for enterprises that require high-performance analytics 
   across diverse and distributed data sources.
 - RBAC in Starburst Enterprise:
-  Starburst Enterprise includes a comprehensive implementation of RBAC that allows organizations to define and manage access controls for users and roles more effectively.
+  Starburst Enterprise includes a comprehensive implementation of RBAC that allows organizations to define and manage access controls for users and roles more effectively:
   1. Fine-Grained Access Control:
      allowing administrators to define specific access permissions at various levels, including catalogs, schemas, tables, columns, and even rows. This allows for precise control over who can access or modify specific pieces of data.
   2. Role-Based Permissions:
@@ -95,7 +100,7 @@ kubectl create secret generic starburstdata --from-file starburstdata.license
 helm upgrade starburst starburstdata/starburst-enterprise --install --version <version> --values registry-access.yaml --values error-stop-sep-cluster.yaml
 ```
 
-### Configure the query logger
+### Configuring the query logger
   
    The Starburst Enterprise platform (SEP) query logger is the backend service that stores information for:
      - Query completion details and events
